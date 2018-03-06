@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block bread %}
+    <nav class="breadcrumb">
+    <div class="container">
+        <i class="Hui-iconfont">&#xe67f;</i><a href={% url 'home' %} class="c-primary">首页</a>
+        <span class="c-gray en">&gt;</span> <span  class="c-gray">技术杂谈</span>
+    </div>
+</nav>
+{% endblock %}
+{% block content %}
+    <section class="container">
+  <!--left-->
+  <div class="col-sm-9 col-md-9 mt-20">
+
+
+  	<!--article list-->
+			<ul class="index_arc">
+{% for article in all_articles %}
+				<li class="index_arc_item">
+					<a href="#" class="pic">
+						<img  class="lazyload" src="/media/{{ article.image }}" alt="应该选" />
+					</a>
+					<h4 class="title"><a href={% url 'article_detail' article.id %}>{{ article.title }}</a></h4>
+					<div class="date_hits">
+						<span>{{ article.auther }}</span>
+						<span>{{ article.add_time }}</span>
+						{% for tag in article.tags.all %}
+                            <span><a href="/article-lists/10.html"> {{ tag}}  </a></span>
+                        {% endfor %}
+						<p class="hits"><i class="Hui-iconfont" title="">&#xe6c1;</i> {{ article.click_nums }}° </p>
+						<p class="commonts"><i class="Hui-iconfont" title="点击量">&#xe622;</i> <span class="cy_cmt_count">{{ article.comment_nums }}</span></p>
+					</div>
+					<div class="desc">{{ article.desc }}</div>
+				</li>
+{% endfor %}
+
+
+				</ul>
+  		<div class="text-c mb-20" id="moreBlog">
+            <a class="btn  radius btn-block " href="javascript:;" onclick="moreBlog('${blogType.id}','${tag.name}');">点击加载更多</a>
+            <a class="btn  radius btn-block hidden" href="javascript:;">加载中……</a>
+        </div>
+  </div>
+
+  <!--right-->
+  <div class="col-sm-3 col-md-3 mt-20">
+
+  	<!--导航-->
+{#  	<div class="panel panel-primary mb-20">#}
+{#			<div class="panel-body">#}
+{#				<input class="btn btn-primary radius nav-btn" type="button" value="杂谈">#}
+{#				<input class="btn btn-primary-outline radius nav-btn" type="button" value="java">#}
+{#				<input class="btn btn-primary-outline radius nav-btn" type="button" value="框架">#}
+{#				<input class="btn btn-primary-outline radius nav-btn" type="button" value="服务域名">#}
+{#			</div>#}
+{#		</div>#}
+
+  	<!--热门推荐-->
+  	<div class="bg-fff box-shadow radius mb-20">
+			<div class="tab-category">
+				<a href=""><strong>热门推荐</strong></a>
+			</div>
+			<div class="tab-category-item">
+				<ul class="index_recd">
+{% for article in hot_articles %}
+					<li>
+						<a href={% url 'article_detail' article.id %}>{{ article.title }}</a>
+						<p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> {{ article.comment_nums }} </p>
+					</li>
+{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<!--点击排行-->
+<!--标签-->
+{#		<div class="bg-fff box-shadow radius mb-20">#}
+{#			<div class="tab-category">#}
+{#				<a href=""><strong>标签云</strong></a>#}
+{#			</div>#}
+{#			<div class="tab-category-item">#}
+{#				<div class="tags"> <a href="http://www.h-ui.net/">H-ui前端框架</a> <a href="http://www.h-ui.net/websafecolors.shtml">Web安全色</a> <a href="http://www.h-ui.net/Hui-4.4-Unslider.shtml">jQuery轮播插件</a> <a href="http://idc.likejianzhan.com/vhost/korea_hosting.php">韩国云虚拟主机</a> <a href="http://www.h-ui.net/bug.shtml">IEbug</a> <a href="http://www.h-ui.net/site.shtml">IT网址导航</a> <a href="http://www.h-ui.net/icon/index.shtml">网站常用小图标</a> <a href="http://www.h-ui.net/tools/jsformat.shtml">web工具箱</a> <a href="http://www.h-ui.net/bg/index.shtml">网站常用背景素材</a> <a href="http://www.h-ui.net/yuedu/chm.shtml">H-ui阅读</a> <a href="http://www.h-ui.net/easydialog-v2.0/index.html">弹出层插件</a> <a href="http://www.h-ui.net/SuperSlide2.1/demo.html">SuperSlide插件</a> <a href="http://www.h-ui.net/TouchSlide1.1/demo.html">TouchSlide</a></div>#}
+{#			</div>#}
+{#		</div>#}
+  </div>
+
+</section>
+{% endblock %}
+

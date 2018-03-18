@@ -64,10 +64,16 @@ class AboutmeView(View):
 
 class ArticleDetailView(View):
     def get(self, request, id):
-        all_articles = ArticleModel.objects.get(id=int(id))
-        print(all_articles.title)
+        articles = ArticleModel.objects.get(id=int(id))
+        all_articles = ArticleModel.objects.all()
+        all_articles = all_articles.order_by('-add_time')
+        hot_articles = all_articles.order_by('-comment_nums')[0:5]
+        click_articles = all_articles.order_by('-click_nums')[0:5]
         context = {
-            'articles': all_articles
+            'articles': articles,
+            'all_articles': all_articles,
+            'hot_articles': hot_articles,
+            'click_articles': click_articles
         }
         return render(request, 'article_detail.html', context)
 

@@ -18,14 +18,12 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
 
-import xadmin
 from article.views import HomeView, ArticleListView, jishuzatanView, AboutmeView, ArticleDetailView
 from blog import settings
 from blog.settings import MEDIA_ROOT
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('xadmin/', xadmin.site.urls),
     path('home/', HomeView.as_view(), name='home'),
     path('jishuzatan/', jishuzatanView.as_view(), name='jishuzatan'),
     path('about/', AboutmeView.as_view(), name='aboutme'),
